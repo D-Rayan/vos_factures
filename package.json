@@ -1,0 +1,40 @@
+{
+  "name": "@rayand/vos_factures",
+  "version": "0.0.1",
+  "description": "API to have better experiences with vosFactures",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "jest --verbose --env=node"
+  },
+  "keywords": [
+    "vosFactures",
+    "vosfactures"
+  ],
+  "author": "Rayan",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/cors": "^2.8.6",
+    "@types/jest": "^25.1.3",
+    "@types/node": "^13.7.4",
+    "@typescript-eslint/eslint-plugin": "^2.20.0",
+    "@typescript-eslint/parser": "^2.20.0",
+    "chai": "^4.1.2",
+    "chai-http": "^4.0.0",
+    "concurrently": "^5.1.0",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-typescript": "^7.0.0",
+    "eslint-plugin-import": "^2.18.2",
+    "jest": "^25.1.0",
+    "mocha": "^5.1.1",
+    "nodemon": "^1.19.4",
+    "nyc": "^13.3.0",
+    "prettier": "^1.19.1",
+    "ts-jest": "^25.2.1",
+    "typescript": "^3.8.2"
+  },
+  "dependencies": {
+    "axios": "^0.19.2",
+    "dotenv": "^8.2.0",
+    "moment": "^2.24.0"
+  }
+}
