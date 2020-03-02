@@ -1,11 +1,12 @@
 {
   "name": "@rayand/vos_factures",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "API to have better experiences with vosFactures",
   "main": "src/index.js",
   "scripts": {
     "test": "jest --verbose --env=node"
   },
+  "homepage": "https://github.com/RayanD-W/vos_factures#readme",
   "keywords": [
     "vosFactures",
     "vosfactures"
