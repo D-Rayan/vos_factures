@@ -1,6 +1,6 @@
 {
   "name": "@rayand/vos_factures",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "API to have better experiences with vosFactures",
   "main": "src/index.js",
   "scripts": {
