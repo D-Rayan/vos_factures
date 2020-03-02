@@ -1,5 +1,5 @@
 {
-  "name": "@rayand/vos_factures",
+  "name": "@rayan-waapi/vos_factures",
   "version": "0.0.4",
   "description": "API to have better experiences with vosFactures",
   "main": "src/index.js",
