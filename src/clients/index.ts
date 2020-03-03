@@ -72,13 +72,14 @@ export class Client implements InterfaceClient {
         return results;
     }
 
-    static async findAll(): Promise<Client[]> {
+    static async findAll(params?: ParamsSearchClient): Promise<Client[]> {
         const results: Client[] = [];
         let page = 1;
         let contactToLoad;
         do {
             contactToLoad = false;
             const tmp = await this.findBy({
+                ...(params || {}),
                 page,
                 perPage: 100,
             });

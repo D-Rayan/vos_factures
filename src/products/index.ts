@@ -65,13 +65,14 @@ export class Product implements InterfaceProducts {
         return results;
     }
 
-    static async findAll(): Promise<Product[]> {
+    static async findAll(params?: ParamsSearchProduct): Promise<Product[]> {
         const results: Product[] = [];
         let page = 1;
         let productToLoad;
         do {
             productToLoad = false;
             const tmp = await this.findBy({
+                ...(params || {}),
                 page,
                 perPage: 100,
             });

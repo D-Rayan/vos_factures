@@ -271,6 +271,19 @@ export interface ParamsSearchInvoice {
     number?: number | null;
     invoiceId?: number | null;
     fromInvoiceId?: number | null;
+    kind?:
+        | "vat"
+        | "estimate"
+        | "proforma"
+        | "correction"
+        | "client_order"
+        | "receipt"
+        | "advance"
+        | "final"
+        | "invoice_other"
+        | "kp"
+        | "kw"
+        | null;
 }
 export class Invoice implements InterfaceInvoice {
     private _id: InterfaceInvoice["id"];
@@ -439,6 +452,7 @@ export class Invoice implements InterfaceInvoice {
         if (params.number) query = `${query}number=${params.number}&`;
         if (params.invoiceId) query = `${query}invoice_id=${params.invoiceId}&`;
         if (params.fromInvoiceId) query = `${query}from_invoice_id=${params.fromInvoiceId}&`;
+        if (params.kind) query = `${query}kind=${params.kind}&`;
         const result = await axios.get(`/invoices.json?${query}`);
         const results: Invoice[] = [];
         for (const dataInvoice of result.data) {
@@ -447,13 +461,15 @@ export class Invoice implements InterfaceInvoice {
         return results;
     }
 
-    static async findAll(): Promise<Invoice[]> {
+
+    static async findAll(params?: ParamsSearchInvoice): Promise<Invoice[]> {
         const results: Invoice[] = [];
         let page = 1;
         let invoiceToLoad;
         do {
             invoiceToLoad = false;
             const tmp = await this.findBy({
+                ...(params || {}),
                 page,
                 perPage: 100,
             });
