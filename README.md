@@ -7,7 +7,7 @@ Package to help with the API from "vosFactures"
 To start you'll need to give to the API your credentials from vosFactures.
 
 ```javascript
-import * as vosFacturesAPI from "@rayand/vos_factures";
+import vosFacturesAPI from "@rayan-waapi/vos_factures";
 
 if (await vosFacturesAPI.authenticate(LOGIN, PASSWORD)) {
     // The package is initialized
@@ -20,7 +20,7 @@ if (await vosFacturesAPI.authenticate(LOGIN, PASSWORD)) {
 
 #### To create a client 
 ```javascript
-import * as vosFacturesAPI from "@rayand/vos_factures";
+import vosFacturesAPI from "@rayan-waapi/vos_factures";
 
 // vosFacturesAPI is initialized
 const client = new vosFacturesAPI.Clients.Client();
@@ -35,7 +35,7 @@ console.log(client.id);
 
 #### To update a client 
 ```javascript
-import * as vosFacturesAPI from "@rayand/vos_factures";
+import vosFacturesAPI from "@rayan-waapi/vos_factures";
 
 // vosFacturesAPI is initialized
 const client = new vosFacturesAPI.Clients.Client({ name: "John Smith" });
@@ -48,7 +48,7 @@ await client.update();
 
 #### To delete a client 
 ```javascript
-import * as vosFacturesAPI from "@rayand/vos_factures";
+import vosFacturesAPI from "@rayan-waapi/vos_factures";
 
 // vosFacturesAPI is initialized
 const client = new vosFacturesAPI.Clients.Client({ name: "John Smith" });
@@ -60,7 +60,7 @@ await client.remove();
 
 #### To retrieve a client 
 ```javascript
-import * as vosFacturesAPI from "@rayand/vos_factures";
+import vosFacturesAPI from "@rayan-waapi/vos_factures";
 
 // vosFacturesAPI is initialized
 const client = await vosFacturesAPI.Clients.Client.findById(clientId);
@@ -68,7 +68,7 @@ const client = await vosFacturesAPI.Clients.Client.findById(clientId);
 
 #### To retrieve many clients
 ```javascript
-import * as vosFacturesAPI from "@rayand/vos_factures";
+import vosFacturesAPI from "@rayan-waapi/vos_factures";
 
 // vosFacturesAPI is initialized
 const clients = await vosFacturesAPI.Clients.Client.findBy({name: "John"}); // array of Client
@@ -76,7 +76,7 @@ const clients = await vosFacturesAPI.Clients.Client.findBy({name: "John"}); // a
 
 #### To retrieve all clients
 ```javascript
-import * as vosFacturesAPI from "@rayand/vos_factures";
+import vosFacturesAPI from "@rayan-waapi/vos_factures";
 
 // vosFacturesAPI is initialized
 const clients = await vosFacturesAPI.Clients.Client.findAll(); // array of Client
@@ -84,7 +84,7 @@ const clients = await vosFacturesAPI.Clients.Client.findAll(); // array of Clien
 
 #### To retrieve invoices from a client
 ```javascript
-import * as vosFacturesAPI from "@rayand/vos_factures";
+import vosFacturesAPI from "@rayan-waapi/vos_factures";
 
 // vosFacturesAPI is initialized
 const client = await vosFacturesAPI.Clients.Client.findById(clientId);
@@ -95,7 +95,7 @@ await client.getInvoices();
 
 #### Create a product
 ```javascript
-import * as vosFacturesAPI from "@rayand/vos_factures";
+import vosFacturesAPI from "@rayan-waapi/vos_factures";
 
 // vosFacturesAPI is initialized
 const product = new vosFacturesAPI.Products.Product({
@@ -110,7 +110,7 @@ await product.save()
 
 #### To update a product 
 ```javascript
-import * as vosFacturesAPI from "@rayand/vos_factures";
+import vosFacturesAPI from "@rayan-waapi/vos_factures";
 
 // vosFacturesAPI is initialized
 const product = new vosFacturesAPI.Products.Product({
@@ -129,7 +129,7 @@ await product.update();
 
 #### To delete a product 
 ```javascript
-import * as vosFacturesAPI from "@rayand/vos_factures";
+import vosFacturesAPI from "@rayan-waapi/vos_factures";
 
 // vosFacturesAPI is initialized
 const product = new vosFacturesAPI.Products.Product({
@@ -147,7 +147,7 @@ await product.remove();
 
 #### To retrieve a product 
 ```javascript
-import * as vosFacturesAPI from "@rayand/vos_factures";
+import vosFacturesAPI from "@rayan-waapi/vos_factures";
 
 // vosFacturesAPI is initialized
 const product = await vosFacturesAPI.Products.Product.findById(productId);
@@ -155,7 +155,7 @@ const product = await vosFacturesAPI.Products.Product.findById(productId);
 
 #### To retrieve many products
 ```javascript
-import * as vosFacturesAPI from "@rayand/vos_factures";
+import vosFacturesAPI from "@rayan-waapi/vos_factures";
 
 // vosFacturesAPI is initialized
 const products = await vosFacturesAPI.Products.Product.findBy({currency: "EUR"}); // array of Product
@@ -163,7 +163,7 @@ const products = await vosFacturesAPI.Products.Product.findBy({currency: "EUR"})
 
 #### To retrieve all products
 ```javascript
-import * as vosFacturesAPI from "@rayand/vos_factures";
+import vosFacturesAPI from "@rayan-waapi/vos_factures";
 
 // vosFacturesAPI is initialized
 const products = await vosFacturesAPI.Products.Product.findAll(); // array of Product
@@ -173,7 +173,7 @@ const products = await vosFacturesAPI.Products.Product.findAll(); // array of Pr
 
 #### Create a invoice
 ```javascript
-import * as vosFacturesAPI from "@rayand/vos_factures";
+import vosFacturesAPI from "@rayan-waapi/vos_factures";
 
 // vosFacturesAPI is initialized
 const invoice = new vosFacturesAPI.Invoices.Invoice({
@@ -186,7 +186,7 @@ await invoice.save()
 
 #### To update a invoice 
 ```javascript
-import * as vosFacturesAPI from "@rayand/vos_factures";
+import vosFacturesAPI from "@rayan-waapi/vos_factures";
 
 //....
 
@@ -195,7 +195,7 @@ await invoice.update();
 
 #### To delete a invoice 
 ```javascript
-import * as vosFacturesAPI from "@rayand/vos_factures";
+import vosFacturesAPI from "@rayan-waapi/vos_factures";
 
 //....
 
@@ -204,7 +204,7 @@ await invoice.remove();
 
 #### To retrieve a invoice 
 ```javascript
-import * as vosFacturesAPI from "@rayand/vos_factures";
+import vosFacturesAPI from "@rayan-waapi/vos_factures";
 
 // vosFacturesAPI is initialized
 const invoice = await vosFacturesAPI.Invoices.Invoice.findById(invoiceId);
@@ -212,7 +212,7 @@ const invoice = await vosFacturesAPI.Invoices.Invoice.findById(invoiceId);
 
 #### To retrieve many invoices
 ```javascript
-import * as vosFacturesAPI from "@rayand/vos_factures";
+import vosFacturesAPI from "@rayan-waapi/vos_factures";
 
 // vosFacturesAPI is initialized
 const invoices = await vosFacturesAPI.Invoices.Invoice.findBy({clientId: clientId}); // array of Invoice
@@ -220,7 +220,7 @@ const invoices = await vosFacturesAPI.Invoices.Invoice.findBy({clientId: clientI
 
 #### To retrieve all invoices
 ```javascript
-import * as vosFacturesAPI from "@rayand/vos_factures";
+import vosFacturesAPI from "@rayan-waapi/vos_factures";
 
 // vosFacturesAPI is initialized
 const invoices = await vosFacturesAPI.Invoices.Invoice.findAll(); // array of Invoice
@@ -228,7 +228,7 @@ const invoices = await vosFacturesAPI.Invoices.Invoice.findAll(); // array of In
 
 #### To create an invoice from an other invoice
 ```javascript
-import * as vosFacturesAPI from "@rayand/vos_factures";
+import vosFacturesAPI from "@rayan-waapi/vos_factures";
 
 // vosFacturesAPI is initialized
 const invoice = await vosFacturesAPI.Invoices.Invoice.findById(invoiceId);
