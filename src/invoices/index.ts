@@ -3,6 +3,7 @@ import * as axiosInstance from "../axiosInstance";
 import moment from "moment";
 import { camelizeObject, unCamelizeObject } from "../helpers";
 import { Product } from "../products";
+import {Client} from "../clients";
 
 const axios = axiosInstance.instance;
 
@@ -500,13 +501,19 @@ export class Invoice implements InterfaceInvoice {
 
     async remove(invoiceId?: number): Promise<void> {
         if (!axiosInstance.isConnected) throw new Error("No credentials");
-        if (!invoiceId && !this.id) throw new Error("No credentials");
+        if (!invoiceId && !this.id) throw new Error("Invalid Argument");
         await axios.delete(`/invoices/${invoiceId || this.id}.json`);
     }
 
     async sendByMail(force = false): Promise<void> {
         if (!axiosInstance.isConnected) throw new Error("No credentials");
         await axios.post(`/invoices/${this.id}/send_by_email.json?force=${force}`);
+    }
+
+    async getClient(): Promise<Client> {
+        if (!axiosInstance.isConnected) throw new Error("No credentials");
+        if (!this.clientId) throw new Error("Invalid Argument");
+        return await Client.findById(this.clientId);
     }
 
     duplicateAs(

@@ -88,6 +88,7 @@ describe("vosFacturesAPI - Invoices", function() {
                 const _invoices = await client.getInvoices();
                 expect(_invoices.length).toBe(1);
                 expect(_invoices[0].id).toBe(invoices[0].id);
+                expect((await _invoices[0].getClient()).id).toBe(client.id);
             } catch (e) {
                 expect(false).toBeTruthy();
             }

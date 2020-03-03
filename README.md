@@ -210,6 +210,15 @@ import vosFacturesAPI from "@rayan-waapi/vos_factures";
 const invoice = await vosFacturesAPI.Invoices.Invoice.findById(invoiceId);
 ```
 
+#### To retrieve the client object from an invoice 
+```javascript
+import vosFacturesAPI from "@rayan-waapi/vos_factures";
+
+// vosFacturesAPI is initialized
+const invoice = await vosFacturesAPI.Invoices.Invoice.findById(invoiceId);
+await invoice.getClient(); // will return a Client
+```
+
 #### To retrieve many invoices
 ```javascript
 import vosFacturesAPI from "@rayan-waapi/vos_factures";

@@ -31,11 +31,11 @@
     "nyc": "^13.3.0",
     "prettier": "^1.19.1",
     "ts-jest": "^25.2.1",
-    "typescript": "^3.8.2"
+    "typescript": "^3.8.2",
+    "dotenv": "^8.2.0"
   },
   "dependencies": {
     "axios": "^0.19.2",
-    "dotenv": "^8.2.0",
     "moment": "^2.24.0"
   }
 }
