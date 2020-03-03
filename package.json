@@ -1,12 +1,12 @@
 {
   "name": "@rayan-waapi/vos_factures",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "API to have better experiences with vosFactures",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "test": "jest --verbose --env=node",
-    "prepublish":  "tsc"
+    "prepublish": "tsc"
   },
   "homepage": "https://github.com/RayanD-W/vos_factures#readme",
   "keywords": [
