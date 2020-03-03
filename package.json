@@ -1,6 +1,6 @@
 {
   "name": "@rayan-waapi/vos_factures",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "API to have better experiences with vosFactures",
   "main": "src/index.js",
   "scripts": {
