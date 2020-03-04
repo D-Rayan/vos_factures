@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/camelcase */
 import * as axiosInstance from "../axiosInstance";
 import moment from "moment";
-import { camelizeObject, unCamelizeObject } from "../helpers";
-import { Product } from "../products";
+import {camelizeObject, unCamelizeObject} from "../helpers";
+import {Product} from "../products";
 import {Client} from "../clients";
 
 const axios = axiosInstance.instance;
@@ -13,7 +13,7 @@ const convertStringToDate = (value: Date | null | undefined | string): Date | nu
     if (typeof value === "string") {
         const tmp = value.split("-");
         valueConverted = moment()
-            .set({ year: +tmp[0], month: +tmp[1], date: +tmp[2] })
+            .set({year: +tmp[0], month: +tmp[1], date: +tmp[2]})
             .toDate();
     } else {
         valueConverted = value;
@@ -286,6 +286,7 @@ export interface ParamsSearchInvoice {
         | "kw"
         | null;
 }
+
 export class Invoice implements InterfaceInvoice {
     private _id: InterfaceInvoice["id"];
     private _userId: InterfaceInvoice["userId"];
@@ -434,6 +435,7 @@ export class Invoice implements InterfaceInvoice {
     private _recipientNote: InterfaceInvoice["recipientNote"];
     private _buyerMobilePhone: InterfaceInvoice["buyerMobilePhone"];
     private _positions: InterfaceInvoice["positions"];
+
     static async findById(invoiceId: number): Promise<Invoice> {
         if (!axiosInstance.isConnected) throw new Error("No credentials");
         const result = await axios.get(`/invoices/${invoiceId}.json`);
@@ -547,8 +549,8 @@ export class Invoice implements InterfaceInvoice {
             positions: this.positions?.map(product => ({
                 productId: product.productId,
                 quantity: product.quantity,
-                ...(product.discount && { discount: product.discount }),
-                ...(product.discountPercent && { discount_percent: product.discountPercent }),
+                ...(product.discount && {discount: product.discount}),
+                ...(product.discountPercent && {discount_percent: product.discountPercent}),
             })),
         });
     }
@@ -566,13 +568,26 @@ export class Invoice implements InterfaceInvoice {
         this.paidDate = moment().format("DD-MM-YYYY H:i:s");
     }
 
-    addProduct(product: Product, quantity = 1): void {
+    addProduct(product: Product, quantity = 1, discountObject?: { type: "Percentage" | "Amount", value: number, code?: string }): void {
         if (!this.positions) this.positions = [];
         if (!product || !product.id) return;
         this.positions.push({
             productId: +product.id,
             quantity: quantity.toString(),
+            ...(discountObject && discountObject.type === "Amount" && {
+                discount: discountObject.value + ""
+            }),
+            ...(discountObject && discountObject.type === "Percentage" && {
+                discountPercent: discountObject.value + ""
+            }),
         });
+        if (discountObject) {
+            this.showDiscount = true;
+            this.discountKind = discountObject.type === "Amount" ? "amount" :
+                this.positions.every(position => position.discountPercent === discountObject.value + "") ?
+                    "percent_total" :
+                    "percent_unit";
+        }
     }
 
     constructor(data: InterfaceInvoice) {
@@ -1705,35 +1720,35 @@ export class Invoice implements InterfaceInvoice {
 
     get positions():
         | {
-              id?: number;
-              invoiceId?: number;
-              name?: string;
-              description?: string | null;
-              priceNet?: string;
-              quantity?: string;
-              totalPriceGross?: string;
-              totalPriceNet?: string;
-              accountId?: number;
-              createdAt?: Date;
-              updatedAt?: Date;
-              additionalInfo?: string | null;
-              quantityUnit?: string | null;
-              tax?: string;
-              priceGross?: string;
-              priceTax?: string;
-              totalPriceTax?: string;
-              kind?: string | null;
-              invoicePositionId?: string | null;
-              productId?: number;
-              deleted?: boolean;
-              discount?: string | null;
-              discountPercent?: string | null;
-              tax2?: string;
-              exchangeRate?: string;
-              accountingTaxKind?: string | null;
-              code?: string | null;
-              additionalFields?: {};
-          }[]
+        id?: number;
+        invoiceId?: number;
+        name?: string;
+        description?: string | null;
+        priceNet?: string;
+        quantity?: string;
+        totalPriceGross?: string;
+        totalPriceNet?: string;
+        accountId?: number;
+        createdAt?: Date;
+        updatedAt?: Date;
+        additionalInfo?: string | null;
+        quantityUnit?: string | null;
+        tax?: string;
+        priceGross?: string;
+        priceTax?: string;
+        totalPriceTax?: string;
+        kind?: string | null;
+        invoicePositionId?: string | null;
+        productId?: number;
+        deleted?: boolean;
+        discount?: string | null;
+        discountPercent?: string | null;
+        tax2?: string;
+        exchangeRate?: string;
+        accountingTaxKind?: string | null;
+        code?: string | null;
+        additionalFields?: {};
+    }[]
         | undefined {
         return this._positions;
     }
@@ -1741,35 +1756,35 @@ export class Invoice implements InterfaceInvoice {
     set positions(
         value:
             | {
-                  id?: number;
-                  invoiceId?: number;
-                  name?: string;
-                  description?: string | null;
-                  priceNet?: string;
-                  quantity?: string;
-                  totalPriceGross?: string;
-                  totalPriceNet?: string;
-                  accountId?: number;
-                  createdAt?: Date;
-                  updatedAt?: Date;
-                  additionalInfo?: string | null;
-                  quantityUnit?: string | null;
-                  tax?: string;
-                  priceGross?: string;
-                  priceTax?: string;
-                  totalPriceTax?: string;
-                  kind?: string | null;
-                  invoicePositionId?: string | null;
-                  productId?: number;
-                  deleted?: boolean;
-                  discount?: string | null;
-                  discountPercent?: string | null;
-                  tax2?: string;
-                  exchangeRate?: string;
-                  accountingTaxKind?: string | null;
-                  code?: string | null;
-                  additionalFields?: {};
-              }[]
+            id?: number;
+            invoiceId?: number;
+            name?: string;
+            description?: string | null;
+            priceNet?: string;
+            quantity?: string;
+            totalPriceGross?: string;
+            totalPriceNet?: string;
+            accountId?: number;
+            createdAt?: Date;
+            updatedAt?: Date;
+            additionalInfo?: string | null;
+            quantityUnit?: string | null;
+            tax?: string;
+            priceGross?: string;
+            priceTax?: string;
+            totalPriceTax?: string;
+            kind?: string | null;
+            invoicePositionId?: string | null;
+            productId?: number;
+            deleted?: boolean;
+            discount?: string | null;
+            discountPercent?: string | null;
+            tax2?: string;
+            exchangeRate?: string;
+            accountingTaxKind?: string | null;
+            code?: string | null;
+            additionalFields?: {};
+        }[]
             | undefined,
     ) {
         this._positions = value;
