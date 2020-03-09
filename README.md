@@ -9,7 +9,7 @@ To start you'll need to give to the API your credentials from vosFactures.
 ```javascript
 import vosFacturesAPI from "@rayan-waapi/vos_factures";
 
-if (await vosFacturesAPI.authenticate(LOGIN, PASSWORD)) {
+if (await vosFacturesAPI.authenticate(API_TOKEN)) {
     // The package is initialized
 } else {
     // We've got an error

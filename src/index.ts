@@ -7,24 +7,12 @@ import * as Invoices from "./invoices";
 import * as Products from "./products";
 import * as WarehouseDocuments from "./warehouse_documents";
 
-/**
- *
- * @param login
- * @param password
- * @returns {Promise<boolean>}
- */
-export const authenticate = async (login: string, password: string): Promise<boolean> => {
-    try {
-        const response = await axiosInstance.instance.post("https://app.vosfactures.fr/login.json", {
-            login,
-            password,
-        });
-        if (response && response.data && response.data.url && response.data.api_token) {
-            axiosInstance.addInterceptor(response.data.url, response.data.api_token);
-            return true;
-        }
-    } catch (error) {}
-    return false;
+export const authenticate = async (ApiToken: string): Promise<boolean> => {
+    if (!ApiToken) return false;
+    const ids = ApiToken.split("/")
+    if (!ids || ids.length !== 2) return false;
+    axiosInstance.addInterceptor(`https://${ids[1]}.vosfactures.fr`, ApiToken);
+    return true;
 };
 
 export { axiosInstance, Banking, Categories, Clients, Departments, Invoices, Products, WarehouseDocuments };

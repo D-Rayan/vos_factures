@@ -14,7 +14,7 @@ const addInterceptor = (baseURL: string, tokenAPI: string): void => {
         const newConfig = {
             ...config,
         };
-        newConfig.url = baseURL + config.url;
+        newConfig.url = baseURL + (config.url && config.url[0] === "/" ? "" : "/") + config.url;
         if (config.method === "get" || config.method === "delete") {
             const indexOfParamsIndicator = newConfig.url.indexOf("?");
             if (indexOfParamsIndicator === -1) {
