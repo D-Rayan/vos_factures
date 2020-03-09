@@ -9,20 +9,23 @@ const axiosInstance = axios.create({
 });
 
 const addInterceptor = (baseURL: string, tokenAPI: string): void => {
+    if (isConnected) return;
     isConnected = true;
     axiosInstance.interceptors.request.use(config => {
         const newConfig = {
             ...config,
         };
-        newConfig.url = baseURL + (config.url && config.url[0] === "/" ? "" : "/") + config.url;
+        if (!config || !config.url || config.url.indexOf(baseURL) === -1) {
+            newConfig.url = baseURL + (config.url && config.url[0] === "/" ? "" : "/") + config.url;
+        }
         if (config.method === "get" || config.method === "delete") {
-            const indexOfParamsIndicator = newConfig.url.indexOf("?");
+            const indexOfParamsIndicator = newConfig?.url?.indexOf("?");
             if (indexOfParamsIndicator === -1) {
-                newConfig.url = newConfig.url.concat("?");
+                newConfig.url = newConfig?.url?.concat("?");
             }
-            newConfig.url = newConfig.url.concat(`${indexOfParamsIndicator === -1 ? "" : "&"}api_token=${tokenAPI}`);
+            newConfig.url = newConfig?.url?.concat(`${indexOfParamsIndicator === -1 ? "" : "&"}api_token=${tokenAPI}`);
             if (testMode) {
-                newConfig.url = newConfig.url.concat(`&test=true`);
+                newConfig.url = newConfig?.url?.concat(`&test=true`);
             }
         } else {
             if (!config.data) {
