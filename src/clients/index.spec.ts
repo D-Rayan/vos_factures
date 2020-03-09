@@ -32,7 +32,7 @@ describe("vosFacturesAPI - Clients", function() {
     describe("API Connected", function() {
         beforeAll(async () => {
             API.axiosInstance.enableTest();
-            await API.authenticate(process.env.VOSFACTURES_API_LOGIN || "", process.env.VOSFACTURES_API_PASSWORD || "");
+            await API.authenticate(process.env.VOSFACTURES_KEY || "");
         });
         it("findById - Should not find the client", async function() {
             try {

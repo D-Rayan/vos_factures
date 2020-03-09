@@ -6,12 +6,12 @@ describe("vosFacturesAPI", function() {
         expect(API.axiosInstance.isConnected).toBe(false);
     });
     it("Shouldn't connect the API", async function() {
-        expect(await API.authenticate("", "")).toBe(false);
+        expect(await API.authenticate("")).toBe(false);
         expect(API.axiosInstance.isConnected).toBe(false);
     });
     it("Should connect the API", async function() {
         expect(
-            await API.authenticate(process.env.VOSFACTURES_API_LOGIN || "", process.env.VOSFACTURES_API_PASSWORD || ""),
+            await API.authenticate(process.env.VOSFACTURES_KEY || ""),
         ).toBe(true);
         expect(API.axiosInstance.isConnected).toBe(true);
     });

@@ -35,7 +35,7 @@ describe("vosFacturesAPI - Invoices", function() {
         const products: Product[] = [];
         beforeAll(async () => {
             API.axiosInstance.enableTest();
-            await API.authenticate(process.env.VOSFACTURES_API_LOGIN || "", process.env.VOSFACTURES_API_PASSWORD || "");
+            await API.authenticate(process.env.VOSFACTURES_KEY || "");
             client = new API.Clients.Client({
                 name: "TEST - John Smith - Invoices",
                 country: "France",
