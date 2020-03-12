@@ -869,7 +869,7 @@ export class Invoice implements InterfaceInvoice {
         if (this.cancelled) params["cancelled"] = this.cancelled;
         if (this.recipientId) params["recipientId"] = this.recipientId;
         if (this.recipientName) params["recipientName"] = this.recipientName;
-        if (this.test) params["test"] = this.test;
+        params["test"] = this.test;
         if (this.discountNet) params["discountNet"] = this.discountNet;
         if (this.approvalStatus) params["approvalStatus"] = this.approvalStatus;
         if (this.accountingVatTaxDate) params["accountingVatTaxDate"] = this.accountingVatTaxDate;
