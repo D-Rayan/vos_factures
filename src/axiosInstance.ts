@@ -34,6 +34,11 @@ const addInterceptor = (baseURL: string, tokenAPI: string): void => {
             // eslint-disable-next-line @typescript-eslint/camelcase
             newConfig.data.api_token = tokenAPI;
             if (testMode) {
+                for (let key in newConfig.data) {
+                    if (typeof newConfig.data[key] === "object") {
+                        newConfig.data[key].test = true;
+                    }
+                }
                 newConfig.data.test = true;
             }
         }
