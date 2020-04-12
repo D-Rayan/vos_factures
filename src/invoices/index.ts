@@ -546,12 +546,20 @@ export class Invoice implements InterfaceInvoice {
             exchangeCurrency: this.exchangeCurrency,
             discountKind: this.discountKind,
             showDiscount: this.showDiscount,
-            positions: this.positions?.map(product => ({
-                productId: product.productId,
-                quantity: product.quantity,
-                ...(product.discount && {discount: product.discount}),
-                ...(product.discountPercent && {discount_percent: product.discountPercent}),
-            })),
+            positions: this.positions?.map(product => {
+                const productData: {[key: string]: any} = {
+                    quantity: product.quantity,
+                    ...(product.discount && {discount: product.discount}),
+                    ...(product.discountPercent && {discount_percent: product.discountPercent}),
+                };
+                if (product.productId) {
+                    productData.productId = product.productId;
+                } else {
+                    productData.name = product.name;
+                    productData.totalPriceGross = product.totalPriceGross;
+                }
+                return productData;
+            }),
         });
     }
 
