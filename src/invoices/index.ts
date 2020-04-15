@@ -459,7 +459,7 @@ export class Invoice implements InterfaceInvoice {
         const result = await axios.get(`/invoices.json?${query}`);
         const results: Invoice[] = [];
         for (const dataInvoice of result.data) {
-            results.push(new Invoice(camelizeObject(dataInvoice)));
+            results.push(await this.findById(dataInvoice.id));
         }
         return results;
     }
