@@ -21,10 +21,10 @@ const convertStringToDate = (value: Date | null | undefined | string): Date | nu
 
     return valueConverted;
 };
-const convertDateToString = (value: Date | null | undefined | string): string | null | undefined => {
+const convertDateToString = (value: Date | null | undefined | string, format: string = "YYYY-MM-DD"): string | null | undefined => {
     let valueConverted: string | null | undefined;
     if (value instanceof Date) {
-        valueConverted = moment(value).format("YYYY-MM-DD");
+        valueConverted = moment(value).format(format);
     } else {
         valueConverted = value;
     }
@@ -448,8 +448,8 @@ export class Invoice implements InterfaceInvoice {
         if (params.page) query = `${query}page=${params.page}&`;
         if (params.perPage) query = `${query}per_page=${params.perPage}&`;
         if (params.period) query = `${query}period=${params.period}&`;
-        if (params.dateFrom) query = `${query}date_from=${convertDateToString(params.dateFrom)}&`;
-        if (params.dateTo) query = `${query}date_to=${convertDateToString(params.dateTo)}&`;
+        if (params.dateFrom) query = `${query}date_from=${convertDateToString(params.dateFrom, "DD/MM/YYYY")}&`;
+        if (params.dateTo) query = `${query}date_to=${convertDateToString(params.dateTo, "DD/MM/YYYY")}&`;
         if (params.searchDateType) query = `${query}search_date_type=${params.searchDateType}&`;
         if (params.clientId) query = `${query}client_id=${params.clientId}&`;
         if (params.number) query = `${query}number=${params.number}&`;
