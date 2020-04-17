@@ -13,7 +13,7 @@ const convertStringToDate = (value: Date | null | undefined | string): Date | nu
     if (typeof value === "string") {
         const tmp = value.split("-");
         valueConverted = moment()
-            .set({year: +tmp[0], month: +tmp[1], date: +tmp[2]})
+            .set({year: +tmp[0], month: +tmp[1] - 1, date: +tmp[2]})
             .toDate();
     } else {
         valueConverted = value;
