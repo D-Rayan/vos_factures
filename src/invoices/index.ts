@@ -259,6 +259,11 @@ export interface InterfaceInvoice {
         code?: null | string;
         additionalFields?: {};
     }[];
+    calculatingStrategy?: {
+        position: 'keep_gross' | 'default',
+        sum: 'keep_gross' | 'keep_net' | 'sum',
+        invoiceFormPriceKind: 'gross' | 'net',
+    } | null;
 }
 
 export interface ParamsSearchInvoice {
@@ -435,6 +440,7 @@ export class Invoice implements InterfaceInvoice {
     private _recipientNote: InterfaceInvoice["recipientNote"];
     private _buyerMobilePhone: InterfaceInvoice["buyerMobilePhone"];
     private _positions: InterfaceInvoice["positions"];
+    private _calculatingStrategy: InterfaceInvoice["calculatingStrategy"];
 
     static async findById(invoiceId: number): Promise<Invoice> {
         if (!axiosInstance.isConnected) throw new Error("No credentials");
@@ -750,6 +756,7 @@ export class Invoice implements InterfaceInvoice {
         this.recipientNote = data.recipientNote ? data.recipientNote : null;
         this.buyerMobilePhone = data.buyerMobilePhone ? data.buyerMobilePhone : null;
         this.positions = data.positions ? data.positions.map(position => camelizeObject(position)) : [];
+        this.calculatingStrategy = data.calculatingStrategy
     }
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -904,12 +911,21 @@ export class Invoice implements InterfaceInvoice {
         if (this.recipientNote) params["recipientNote"] = this.recipientNote;
         if (this.buyerMobilePhone) params["buyerMobilePhone"] = this.buyerMobilePhone;
         if (this.positions) params["positions"] = this.positions;
+        if (this.positions) params["calculatingStrategy"] = this.calculatingStrategy;
 
         return unCamelizeObject(params);
     }
 
     get accountingIncomeTaxDate(): Date | null | undefined | string {
         return this._accountingIncomeTaxDate;
+    }
+
+    get calculatingStrategy(): InterfaceInvoice["calculatingStrategy"] {
+        return this._calculatingStrategy;
+    }
+
+    set calculatingStrategy(value: InterfaceInvoice["calculatingStrategy"]) {
+        this._calculatingStrategy = value;
     }
 
     set accountingIncomeTaxDate(value: Date | null | undefined | string) {
