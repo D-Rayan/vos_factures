@@ -911,7 +911,7 @@ export class Invoice implements InterfaceInvoice {
         if (this.recipientNote) params["recipientNote"] = this.recipientNote;
         if (this.buyerMobilePhone) params["buyerMobilePhone"] = this.buyerMobilePhone;
         if (this.positions) params["positions"] = this.positions;
-        if (this.positions) params["calculatingStrategy"] = this.calculatingStrategy;
+        if (this.calculatingStrategy) params["calculatingStrategy"] = this.calculatingStrategy;
 
         return unCamelizeObject(params);
     }
