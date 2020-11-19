@@ -557,6 +557,8 @@ export class Invoice implements InterfaceInvoice {
                     quantity: product.quantity,
                     ...(product.discount && {discount: product.discount}),
                     ...(product.discountPercent && {discount_percent: product.discountPercent}),
+                    tax: product.tax,
+                    additionalFields: product.additionalFields,
                 };
                 if (product.productId) {
                     productData.productId = product.productId;
@@ -566,6 +568,7 @@ export class Invoice implements InterfaceInvoice {
                 }
                 return productData;
             }),
+            calculatingStrategy: this.calculatingStrategy,
         });
     }
 
@@ -579,7 +582,7 @@ export class Invoice implements InterfaceInvoice {
 
     setAsPaid(): void {
         this.status = "paid";
-        this.paidDate = moment().format("DD-MM-YYYY H:i:s");
+        this.paidDate = moment().format("YYYY-MM-DD");
     }
 
     addProduct(product: Product, quantity = 1, discountObject?: { type: "Percentage" | "Amount", value: number, code?: string }): void {
