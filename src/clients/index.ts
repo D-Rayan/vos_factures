@@ -117,7 +117,7 @@ export class Client implements InterfaceClient {
     async getInvoices(): Promise<Invoice[]> {
         if (!axiosInstance.isConnected) throw new Error("No credentials");
         if (!this.id) throw new Error("Method invalid argument");
-        return await Invoice.findBy({ clientId: +this.id });
+        return await Invoice.findBy({ clientId: +this.id, kind: "accounting_only" });
     }
 
     toParams(): {} {

@@ -289,6 +289,7 @@ export interface ParamsSearchInvoice {
         | "invoice_other"
         | "kp"
         | "kw"
+        | "accounting_only"
         | null;
 }
 
